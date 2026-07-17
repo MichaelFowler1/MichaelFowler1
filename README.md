@@ -1,4 +1,4 @@
-# Hi, I'm Michael Fowler 👋
+# Hi, I'm Michael Fowler
 
 I build **trustworthy autonomy** — systems where non-deterministic AI is supervised by rigid, deterministic software.
 
@@ -8,7 +8,7 @@ Background: cleared, NAVAIR. Python · PyTorch · CUDA · Node.js.
 
 ---
 
-## 🛰️ Featured Work
+## Featured Work
 
 ### Autonomy under guardrails
 - **[apex-minecraft-agent-showcase](https://github.com/MichaelFowler1/apex-minecraft-agent-showcase)** — A 12,000+ line autonomous agent that plays Minecraft end-to-end (punching trees → Ender Dragon). GPT-5.1 acts as a strategic consultant, but a deterministic JavaScript supervisor holds veto power: 20 Hz reflex interrupts, prerequisite enforcement, and an action sanitizer that rejects hallucinated commands before they execute.
@@ -27,10 +27,10 @@ Background: cleared, NAVAIR. Python · PyTorch · CUDA · Node.js.
 
 ---
 
-## 🔧 Currently building
+## Currently building
 
 A passive RF anomaly detector — ESP32 edge sensors feeding a Raspberry Pi analysis node. Same philosophy, smaller hardware.
 
-## 📫 Reach me
+## Reach me
 
 Open an issue on any repo, or connect through the links on my profile.
