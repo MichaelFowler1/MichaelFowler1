@@ -1,36 +1,53 @@
 # Hi, I'm Michael Fowler
 
-I build **trustworthy autonomy** — systems where non-deterministic AI is supervised by rigid, deterministic software.
+I'm an operations research analyst in defense cost estimating. For the last three years I've built life-cycle cost estimates, tracked earned value and checked schedules for Navy aviation acquisition programs, and I write Python for the parts of that job that shouldn't be done by hand.
 
-Across every project on this profile, the same engineering philosophy shows up: the interesting problem isn't making an AI *smart*, it's building the guardrails, interrupts, and validation layers that let you actually trust it with something that matters — a satellite, a network, a live 3D world.
+Most of my time on GitHub goes to two open-source tools. Both are built for the way cost work actually gets done: in Excel, by a team, with numbers someone will have to defend in a review.
 
-Background: cleared, NAVAIR. Python · PyTorch · CUDA · Node.js.
+## cost-core
 
----
+**[cost-core](https://github.com/MichaelFowler1/cost-risk-toolkit)** does the analysis a cost shop runs every month, from one command, `ce-core`.
 
-## Featured Work
+- **Cost risk.** Put an estimate in Excel with a low, most likely and high for each WBS element. You get the S-curve, the chance the estimate is exceeded, what it takes to be 80% sure, which elements drive the spread, and the P80 reserve shared out across the WBS.
+- **Earned value.** Forecasts final cost and finish from a spreadsheet or an IPMDAR delivery, with earned schedule, independent EACs, variance thresholds and the monthly data checks.
+- **Schedules.** The DCMA 14-point check on a Microsoft Project file, and joint cost and schedule confidence (JCL).
+- **The rest of the toolbox.** Learning curve and rate fits for production lots, analysis of alternatives on life-cycle cost, choosing a portfolio within a budget, and base-year to then-year conversion with the index you supply.
 
-### Autonomy under guardrails
-- **[apex-minecraft-agent-showcase](https://github.com/MichaelFowler1/apex-minecraft-agent-showcase)** — A 12,000+ line autonomous agent that plays Minecraft end-to-end (punching trees → Ender Dragon). GPT-5.1 acts as a strategic consultant, but a deterministic JavaScript supervisor holds veto power: 20 Hz reflex interrupts, prerequisite enforcement, and an action sanitizer that rejects hallucinated commands before they execute.
-- **[homegrown-agent](https://github.com/MichaelFowler1/homegrown-agent)** — An autonomous coding agent built from scratch in PowerShell. No agent frameworks — self-directed goals, sandboxed Docker execution, self-evaluation, and retry. Runs local-first on Ollama or free cloud (Groq).
-- **[Sentinel-Node](https://github.com/MichaelFowler1/Sentinel-Node)** — Simulated satellite flight software for fault detection, isolation, and recovery. Linear Kalman filters own the deterministic physics; an LLM generates SITREPs during simulated EW jamming. The math flies the satellite — the AI just explains what happened.
-- **[Edge-Adaptive-Heuristic-Node](https://github.com/MichaelFowler1/Edge-Adaptive-Heuristic-Node)** — A self-modifying, offline-first execution environment with AST-validated syntax guarding: code evolves continuously on edge hardware, but nothing runs until it parses clean.
+Every run reads Excel and writes a `report.xlsx` and a `brief.pptx`, says what the result means in plain words and writes down every assumption it made. It runs on your own machine and sends nothing anywhere. As far as I can find, it's the first public Python package that does all of these together.
 
-### Sensing & geospatial intelligence
-- **[Geoint](https://github.com/MichaelFowler1/Geoint)** — Real-time geospatial common operating picture: GPU object detection on georeferenced overhead imagery (DOTA-trained OBB), fused with live ADS-B air tracks and LLM-generated SITREPs. FastAPI · PostGIS · Leaflet.
-- **[satnogs-waterfall-classifier](https://github.com/MichaelFowler1/satnogs-waterfall-classifier)** — ResNet18 transfer learning that triages SatNOGS RF waterfalls into signal vs. noise.
-- **[gnss-interference-detector](https://github.com/MichaelFowler1/gnss-interference-detector)** — Detecting GNSS jamming and spoofing from aircraft data.
+```bash
+pip install cost-core
+ce-core demo cost-risk
+```
 
-### Security & edge systems
-- **[home-security-auditor](https://github.com/MichaelFowler1/home-security-auditor)** — Read-only home network security auditor: nmap + PowerShell host checks + credential exposure detection, with an LLM-generated kill-chain report and prioritized remediation.
-- **[lanledger](https://github.com/MichaelFowler1/lanledger)** — Passive home network monitor on a Raspberry Pi edge sensor with local LLM analysis. No cloud, no payload capture.
+[cost-core-starter](https://github.com/MichaelFowler1/cost-core-starter) has example workbooks ready to run. It's free for noncommercial use and for U.S. government work, contractors included ([the licence](https://github.com/MichaelFowler1/cost-risk-toolkit#license) has the details).
 
----
+If you'd rather click than type commands, [lot-cost-model](https://github.com/MichaelFowler1/lot-cost-model) puts the learning-curve side of cost-core in a desktop window: type in your production lots, click Run, and get back an Excel workbook with the fit, the lot-by-lot projections and the charts.
 
-## Currently building
+## xlgit
 
-A passive RF anomaly detector — ESP32 edge sensors feeding a Raspberry Pi analysis node. Same philosophy, smaller hardware.
+**[xlgit](https://github.com/MichaelFowler1/excel-git)** is git diff and merge for Excel. Two people edit the same workbook on their own branches, and git merges it cell by cell. Charts, tables, pivot tables and macros come through intact, and only a cell you both changed is a conflict.
 
-## Reach me
+`git diff` shows `Budget!B2 1000 -> 1100` instead of "Binary files differ", and the [GitHub Action](https://github.com/marketplace/actions/excel-diff-xlgit) comments every changed cell, chart and pivot on a pull request. As far as I know it's the only free, open-source tool that merges two versions of a workbook automatically and keeps everything in it working. It's still beta, fuzz-tested against about 3,000 real workbooks, and Apache-2.0.
 
-Open an issue on any repo, or connect through the links on my profile.
+```bash
+pip install xlgit
+xlgit demo
+```
+
+## Why these two
+
+On most teams a cost model is a workbook that gets emailed around until someone's copy is called `estimate_v7_FINAL.xlsx`. xlgit puts that workbook under version control so two analysts can work on it at once and see exactly what the other changed. cost-core runs the risk, EVM and schedule analysis on it. Between them, an estimate gets the same history and review that code does.
+
+## What I know
+
+- **Cost estimating:** life-cycle cost estimates, CERs and regression, learning curves and rate effects, inflation and quantity normalization, CSDR and FlexFile data.
+- **Earned value and schedule:** IPMDAR surveillance, independent EACs, DCMA 14-point assessments, schedule risk analysis, JCL.
+- **Risk:** Monte Carlo cost and schedule risk, correlation across the WBS, S-curves and confidence-level funding.
+- **Code:** Python (pandas, NumPy, SciPy), SQL, Power Query, Git and CI, and locally hosted LLMs for data that can't leave the building.
+
+MS in Systems Analysis from the Naval Postgraduate School, with graduate certificates in cost estimating and analysis and in systems analysis. BS in Information Systems from UMBC.
+
+Everything here is a personal project, built on my own time and equipment. None of it is endorsed by the Navy, the Department of Defense or any employer.
+
+Find me on [LinkedIn](https://www.linkedin.com/in/michaelfowlerii), or open an issue on any repo.
